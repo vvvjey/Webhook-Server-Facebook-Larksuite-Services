@@ -56,6 +56,6 @@ app.get("/webhooks", (req, res) => {
   });
 
 
-app.listen(8080, () => {
-      console.log('server listening on port 8080')
+app.listen(process.env.PORT, () => {
+      console.log(`server listening on port ${process.env.PORT}`)
 })
