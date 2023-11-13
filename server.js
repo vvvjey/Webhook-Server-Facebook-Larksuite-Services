@@ -33,7 +33,7 @@ app.post("/webhook", (req, res) => {
     res.sendStatus(404);
   }
 }); 
-app.get("/webhooks", (req, res) => {
+app.get("/webhook", (req, res) => {
   var verify_token = process.env.VERIFY_TOKEN
   console.log('verify token ',verify_token)
   // Parse the query params
