@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
       res.send('Hello Hùng our server!')
 })
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN
+
+
 app.post("/webhook", (req, res) => {
     let body = req.body;
   
@@ -18,13 +22,14 @@ app.post("/webhook", (req, res) => {
   // Send a 200 OK response if this is a page webhook
 
   if (body.object === "page") {
-    // Returns a '200 OK' response to all requests
-    body.entry.forEach(function(entry){
-      let webhook_event = entry.messaging[0]
-      console.log(webhook_event)
-    })
+     // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
 
-    res.status(200).send("EVENT_RECEIVED");
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
+        res.status(200).send("EVENT_RECEIVED");
 
     // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
 
@@ -54,6 +59,22 @@ app.get("/webhook", (req, res) => {
       }
     }
   });
+
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
+}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+  
+}
 
 
 app.listen(process.env.PORT, () => {
