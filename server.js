@@ -6,7 +6,7 @@ app.use(cors())
 
 app.get('/', (req, res) => {
 
-      res.send('Hello from our server!')
+      res.send('Hello Hùng our server!')
 })
 
 app.post("/webhook", (req, res) => {
