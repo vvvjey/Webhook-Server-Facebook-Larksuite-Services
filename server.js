@@ -28,6 +28,8 @@ app.post("/webhook", (req, res) => {
 
   if (body.object === "page") {
      // Gets the body of the webhook event
+     body.entry.forEach(function(entry) {
+
       let webhook_event = entry.messaging[0];
       console.log('abc',webhook_event);
 
@@ -37,7 +39,7 @@ app.post("/webhook", (req, res) => {
         res.status(200).send("EVENT_RECEIVED");
 
     // Determine which webhooks were triggered and get sender PSIDs and locale, message content and more.
-
+     })
   } else {
     // Return a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
