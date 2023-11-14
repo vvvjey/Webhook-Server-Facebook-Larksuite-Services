@@ -4,14 +4,17 @@ const cors = require('cors');
 var bodyParser = require('body-parser')
 const request = require('request');
 require('dotenv').config();
+const { engine } = require('express-handlebars');
 app.use(cors())
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
-app.get('/', (req, res) => {
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
 
-      res.send('Hello Hùng our server!')
+app.get('/', (req, res) => {
+  res.render('home')
 })
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -111,6 +114,9 @@ function callSendAPI(sender_psid, response) {
     "message": response
   }
 
+
+  
+  
   // Send the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
